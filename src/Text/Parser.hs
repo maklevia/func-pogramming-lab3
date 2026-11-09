@@ -70,7 +70,12 @@ takeWordCharacters input@(character : _)
       | isApostrophe current =
           let (wordRest, remaining) = go rest
           in (current : wordRest, remaining)
+      | isInnerHyphen current rest =
+          let (wordRest, remaining) = go rest
+          in (current : wordRest, remaining)
       | otherwise = ([], current : rest)
 
     isApostrophe symbol = symbol == '\'' || symbol == '\8217'
+    isInnerHyphen '-' (next : _) = isWordStart (Symbol next)
+    isInnerHyphen _ _ = False
 takeWordCharacters [] = ([], [])

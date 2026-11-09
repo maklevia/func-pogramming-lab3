@@ -43,6 +43,10 @@ main = do
     map wordText (documentWords (parseDocument "м'ята та foldl'"))
       == ["м'ята", "та", "foldl'"]
 
+  check "parser keeps a hyphenated word together" $
+    map wordText (documentWords (parseDocument "будь-який текст"))
+      == ["будь-який", "текст"]
+
   check "parser recognises an ellipsis as one punctuation mark" $
     map punctuationKind (documentPunctuation (parseDocument "Чекай... далі."))
       == [EllipsisMark, Period]
