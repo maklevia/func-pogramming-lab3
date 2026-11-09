@@ -1,0 +1,42 @@
+cabal-version:      3.0
+name:               textbook-word-sorter
+version:            0.1.0.0
+synopsis:           Textbook text processing and letter-frequency word sorting
+description:        Laboratory work 3: text processing in Haskell with Symbol, Word, Sentence and Punctuation types.
+build-type:         Simple
+
+common warnings
+    ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates -O2
+
+library
+    import:           warnings
+    hs-source-dirs:   src
+    exposed-modules:
+        CLI
+        Text.Analysis
+        Text.Normalize
+        Text.Parser
+        Text.Render
+        Text.Types
+    build-depends:
+        base >=4.17 && <5
+    default-language: GHC2021
+
+executable textbook-word-sorter
+    import:           warnings
+    hs-source-dirs:   app
+    main-is:          Main.hs
+    build-depends:
+        base,
+        textbook-word-sorter
+    default-language: GHC2021
+
+test-suite spec
+    import:           warnings
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Spec.hs
+    build-depends:
+        base,
+        textbook-word-sorter
+    default-language: GHC2021
